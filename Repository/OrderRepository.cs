@@ -24,5 +24,17 @@ namespace Autoservice_Back.Repository
         {
             return  _dbContext.Orders.Where(order => order.ClientId == id).Include(order => order.Car);
         }
+
+        public IEnumerable<Order> GetActiveOrders(int id)
+        {
+            return GetAllOrders(id).Where(order => order.IsActive);
+        }
+
+        public IEnumerable<Order> GetHistoryOrders(int id)
+        {
+            return GetAllOrders(id).Where(order => !order.IsActive);
+        }
+
+         
     }
 }

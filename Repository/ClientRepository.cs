@@ -25,5 +25,10 @@ namespace Autoservice_Back.Repository
         {
             return _dbContext.Clients.Where(x => x.Id == id).FirstOrDefault();
         }
+
+        public IEnumerable<Client> GetClients()
+        {
+            return _dbContext.Clients;
+        }
     }
 }

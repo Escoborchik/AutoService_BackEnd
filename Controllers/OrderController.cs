@@ -33,12 +33,20 @@ namespace Autoservice_Back.Controllers
 
         }
 
-        [HttpGet]
-        public IActionResult Get([FromServices] IOrders reposorder,
+        [HttpGet("History")]
+        public IActionResult GetOrderHistory([FromServices] IOrders reposorder,
             [FromQuery] int id )
         {              
                         
-            return Ok(reposorder.GetAllOrders(id));
+            return Ok(reposorder.GetHistoryOrders(id));
+        }
+
+        [HttpGet("Active")]
+        public IActionResult GetActiveOrder([FromServices] IOrders reposorder,
+            [FromQuery] int id)
+        {
+
+            return Ok(reposorder.GetActiveOrders(id));
         }
     }
 }
