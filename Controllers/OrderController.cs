@@ -1,6 +1,7 @@
 ﻿using Autoservice_Back.DTO;
 using Autoservice_Back.Interfaces;
 using Autoservice_Back.Models;
+using AutoService_BackEnd.DTO;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Autoservice_Back.Controllers
@@ -36,17 +37,43 @@ namespace Autoservice_Back.Controllers
         [HttpGet("History")]
         public IActionResult GetOrderHistory([FromServices] IOrders reposorder,
             [FromQuery] int id )
-        {              
-                        
-            return Ok(reposorder.GetHistoryOrders(id));
+        {
+            var list = reposorder.GetHistoryOrders(id);            
+            return Ok(GetAnswers(list));
         }
 
         [HttpGet("Active")]
         public IActionResult GetActiveOrder([FromServices] IOrders reposorder,
             [FromQuery] int id)
         {
+            var list = reposorder.GetActiveOrders(id);
+            return Ok(GetAnswers(list));             
+        }
 
-            return Ok(reposorder.GetActiveOrders(id));
+        private static IEnumerable<AnswerGetOrder> GetAnswers(IEnumerable<Order> list)
+        {
+            var answerlist = new List<AnswerGetOrder>();
+            foreach (var order in list)
+            {
+                var answer = new AnswerGetOrder()
+                {
+                    Description = order.Description,
+                    IsActive = order.IsActive,
+                    Start = order.Start,
+                    End = order.End,
+                    Result = order.Result,
+                    Car = new CarAnswer 
+                    { 
+                        ManufactureYear = order.Car.ManufactureYear,
+                        MileAge = order.Car.MileAge,
+                        StateNumber = order.Car.StateNumber,
+                        Vin = order.Car.Vin,
+                    },
+                };
+                answerlist.Add(answer);
+            }
+
+            return answerlist;
         }
     }
 }

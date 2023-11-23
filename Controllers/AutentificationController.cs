@@ -11,28 +11,33 @@ namespace AutoService_BackEnd.Controllers
         [HttpPost]
         public IActionResult Autentificate([FromBody] DataUser dataUser, [FromServices] IClients reposclient)
         {
-            var allclients = reposclient.GetClients();
-            int client_id = 0;
+            var answer = new AnswerAutentic();
+            var allclients = reposclient.GetClients();            
             foreach (var client in allclients)
             {
                 if (client.Phone.Equals(dataUser.Phone) && client.Password.Equals(dataUser.Password))
                 {
-                    client_id = client.Id;
+                    answer.Client_id = client.Id;
+                    answer.Name = client.Name;
+                    answer.SurName = client.Surname;
+                    answer.SecondName = client.SecondName;
+                    break;
                 }
                 else
                 {
-                    client_id = -1;
+                    answer.Client_id = -1;
                 }
             }
-            if (client_id == -1)
+            if (answer.Client_id == -1)
             {
                 return new StatusCodeResult(401);
             }
             else
             {
-                return Ok(client_id);
+                return Ok(answer);
             }
             
         }
     }
+   
 }
