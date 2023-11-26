@@ -9,10 +9,9 @@ namespace Autoservice_Back.Models
     {
         [Key]
         public int Id { get; set; }     
-        public int Vin { get; set; }
+        public string Vin { get; set; }
         public string StateNumber { get; set; }        
-        public int MileAge { get; set; }
-        public int ManufactureYear { get; set; }
+        public int MileAge { get; set; }      
 
         [JsonIgnore]
         public List<Order> Orders { get; set;}

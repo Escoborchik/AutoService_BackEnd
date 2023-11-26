@@ -9,7 +9,7 @@ namespace Autoservice_Back.DTO
         public int CLient_Id { get; set; }
 
         [JsonPropertyName("Vin")]
-        public int Vin { get; set; }
+        public string Vin { get; set; }
 
         [JsonPropertyName("StateNumber")]
         public string StateNumber { get; set; }

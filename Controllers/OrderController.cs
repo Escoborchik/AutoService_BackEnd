@@ -19,8 +19,7 @@ namespace Autoservice_Back.Controllers
             {
                 Vin = order.Vin,
                 StateNumber = order.StateNumber,
-                MileAge = order.MileAge,
-                ManufactureYear = order.ManufactureYear,
+                MileAge = order.MileAge,                
             };
             reposCars.AddCar(car);
             var innerorder = new Order()
@@ -61,14 +60,11 @@ namespace Autoservice_Back.Controllers
                     IsActive = order.IsActive,
                     Start = order.Start,
                     End = order.End,
-                    Result = order.Result,
-                    Car = new CarAnswer 
-                    { 
-                        ManufactureYear = order.Car.ManufactureYear,
-                        MileAge = order.Car.MileAge,
-                        StateNumber = order.Car.StateNumber,
-                        Vin = order.Car.Vin,
-                    },
+                    Result = order.Result,                                                                
+                    MileAge = order.Car.MileAge,
+                    StateNumber = order.Car.StateNumber,
+                    Vin = order.Car.Vin,
+                    
                 };
                 answerlist.Add(answer);
             }

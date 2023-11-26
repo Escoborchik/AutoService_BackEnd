@@ -14,6 +14,8 @@ namespace Autoservice_Back.Models
         public string Telegram { get; set; }
         public string Phone { get; set; }
         public string Description { get; set; }
+        public string Vin { get; set; }
+        public string StateNumber { get; set; } 
 
     }
 }

@@ -9,7 +9,10 @@ namespace AutoService_BackEnd.DTO
         public bool IsActive { get; set; }  
         public DateTime Start { get; set; }  
         public DateTime End { get; set; }
-        public string Result { get; set; }         
-        public CarAnswer Car { get; set; }
+        public string Result { get; set; }
+        public string Vin { get; set; }
+        public string StateNumber { get; set; }
+        public int MileAge { get; set; }
+         
     }
 }
