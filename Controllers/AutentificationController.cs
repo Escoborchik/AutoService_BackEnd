@@ -9,10 +9,11 @@ namespace AutoService_BackEnd.Controllers
     public class AutentificationController : Controller
     {
         [HttpPost]
-        public IActionResult Autentificate([FromBody] DataUser dataUser, [FromServices] IClients reposclient)
+        public IActionResult Autentificate([FromBody] DataUser dataUser, [FromServices] IClients reposclient,
+            [FromServices] IOrders reposorder)
         {
             var answer = new AnswerAutentic();
-            var allclients = reposclient.GetClients();
+            var allclients = reposclient.GetClients().ToList();
             foreach (var client in allclients)
             {
                 if (client.Phone.Equals(dataUser.Phone) && client.Password.Equals(dataUser.Password))
@@ -21,7 +22,7 @@ namespace AutoService_BackEnd.Controllers
                     answer.Name = client.Name;
                     answer.SurName = client.Surname;
                     answer.SecondName = client.SecondName;
-
+                    answer.ToNotify = reposorder.GetActiveOrders(client.Id).Any(order => DateTime.Now - order.Start > TimeSpan.FromMinutes(1));
                     break;
                 }
                 else

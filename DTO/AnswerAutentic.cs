@@ -6,5 +6,6 @@
         public string  Name { get; set;}
         public string  SurName { get; set;}
         public string  SecondName { get; set;}
+        public bool ToNotify { get; set; }
     }
 }

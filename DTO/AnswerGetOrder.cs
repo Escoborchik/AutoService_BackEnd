@@ -6,6 +6,7 @@ namespace AutoService_BackEnd.DTO
     public class AnswerGetOrder
     {        
         public string Description { get; set; }
+        public string Work {  get; set; }
         public bool IsActive { get; set; }  
         public DateTime Start { get; set; }  
         public DateTime End { get; set; }

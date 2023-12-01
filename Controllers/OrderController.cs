@@ -25,6 +25,7 @@ namespace Autoservice_Back.Controllers
             var innerorder = new Order()
             {
                 Description = order.Description,
+                Work = order.Work,
                 Client = client,
                 Car = car,
             };            
@@ -64,6 +65,7 @@ namespace Autoservice_Back.Controllers
                     MileAge = order.Car.MileAge,
                     StateNumber = order.Car.StateNumber,
                     Vin = order.Car.Vin,
+                    Work = order.Work
                     
                 };
                 answerlist.Add(answer);

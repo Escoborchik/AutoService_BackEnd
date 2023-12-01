@@ -20,6 +20,9 @@ namespace Autoservice_Back.DTO
         [JsonPropertyName("ManufactureYear")]
         public int ManufactureYear { get; set; }
 
+        [JsonPropertyName("Work")]
+        public string Work { get; set; }
+
         [JsonPropertyName("Description")]
         public string Description { get; set; }
 
