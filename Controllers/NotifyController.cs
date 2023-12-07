@@ -11,6 +11,19 @@ namespace AutoService_BackEnd.Controllers
     [Route("api/[controller]")]
     public class NotifyController : Controller
     {
+        public static List<string> Works = new()
+        {
+            "Замена моторного масло",
+            "Замена воздушного фильтра",
+            "Замена Свечи зажигания",
+            "Замена ремня ГРМ",
+            "Регулировка клапанов",
+            "Замена рабочая жидкость в трансмиссии",
+            "Замена салонного фильтра",
+            "Осмотр ходовой части"
+        };
+
+
         [HttpGet]
         public IActionResult GetOldOrders([FromServices] IOrders reposorder,
             [FromQuery] int id)
@@ -19,8 +32,13 @@ namespace AutoService_BackEnd.Controllers
             var notifies = new List<NotifyAnswer>();
             foreach (var item in list)
             {
-                var notify = new NotifyAnswer() { DateTime = item.Start, Work = item.Work };
-                notifies.Add(notify);
+                
+                if (Works.Contains(item.Work)) 
+                {
+                    var notify = new NotifyAnswer() { DateTime = item.Start, Work = item.Work};
+                    notifies.Add(notify);
+                }
+                
             }
             return Ok(notifies);
         }

@@ -1,6 +1,8 @@
 ﻿using Autoservice_Back.Interfaces;
 using AutoService_BackEnd.DTO;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.OpenApi.Services;
+using System.Linq.Expressions;
 
 namespace AutoService_BackEnd.Controllers
 {
@@ -22,8 +24,13 @@ namespace AutoService_BackEnd.Controllers
                     answer.Name = client.Name;
                     answer.SurName = client.Surname;
                     answer.SecondName = client.SecondName;
-                    answer.ToNotify = reposorder.GetActiveOrders(client.Id).Any(order => DateTime.Now - order.Start > TimeSpan.FromMinutes(1));
+                    answer.ToNotify = reposorder.GetActiveOrders(client.Id).Where(order => NotifyController.Works.Contains(order.Work))
+                        .Any(order => DateTime.Now - order.Start > TimeSpan.FromMinutes(1));
                     break;
+                }
+                else if (client.Phone.Equals(dataUser.Phone))
+                {
+                    answer.Client_id = -2;
                 }
                 else
                 {
@@ -31,6 +38,10 @@ namespace AutoService_BackEnd.Controllers
                 }
             }
             if (answer.Client_id == -1)
+            {
+                return new StatusCodeResult(404);
+            }
+            else if(answer.Client_id == -2)
             {
                 return new StatusCodeResult(401);
             }
