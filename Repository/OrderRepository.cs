@@ -44,6 +44,7 @@ namespace Autoservice_Back.Repository
             var order = GetOrder(id, id_order);
             order.IsActive = false;
             order.Result = result;
+            order.End = DateTime.Now;
             _dbContext.SaveChanges();
         }
     }
