@@ -28,7 +28,7 @@ namespace AutoService_BackEnd.Controllers
         public IActionResult GetOldOrders([FromServices] IOrders reposorder,
             [FromQuery] int id)
         {
-            var list = reposorder.GetActiveOrders(id).Where(order => DateTime.Now - order.Start > TimeSpan.FromMinutes(1));
+            var list = reposorder.GetHistoryOrders(id).Where(order => DateTime.Now - order.Start > TimeSpan.FromMinutes(1));
             var notifies = new List<NotifyAnswer>();
             foreach (var item in list)
             {

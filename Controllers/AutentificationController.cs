@@ -24,7 +24,7 @@ namespace AutoService_BackEnd.Controllers
                     answer.Name = client.Name;
                     answer.SurName = client.Surname;
                     answer.SecondName = client.SecondName;
-                    answer.ToNotify = reposorder.GetActiveOrders(client.Id).Where(order => NotifyController.Works.Contains(order.Work))
+                    answer.ToNotify = reposorder.GetHistoryOrders(client.Id).Where(order => NotifyController.Works.Contains(order.Work))
                         .Any(order => DateTime.Now - order.Start > TimeSpan.FromMinutes(1));
                     break;
                 }
@@ -37,6 +37,7 @@ namespace AutoService_BackEnd.Controllers
                     answer.Client_id = -1;
                 }
             }
+
             if (answer.Client_id == -1)
             {
                 return new StatusCodeResult(404);
